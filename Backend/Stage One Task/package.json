@@ -6,15 +6,12 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node server.js",
-    "dev": "nodemon server.js"
-  },
-  "engines": {
-    "node": ">=20.6.1"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
   "keywords": [],
-  "author": "Google LLC",
-  "license": "Apache-2.0",
+  "author": "",
+  "license": "ISC",
   "dependencies": {
     "axios": "^1.7.2",
     "dotenv": "^16.4.5",
