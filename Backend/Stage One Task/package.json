@@ -2,9 +2,7 @@
   "name": "stage-one-task",
   "version": "1.0.0",
   "description": "Simple web server",
-  "private": true,
   "main": "index.js",
-  "type": "module",
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js"
