@@ -1,10 +1,12 @@
-const express = require("express");
-const app = express();
-const axios = require("axios");
-require("dotenv").config();
+import express, { json, urlencoded } from "express";
+import fetch from "node-fetch";
+import dotenv from 'dotenv';
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+dotenv.config();
+const app = express();
+
+app.use(json());
+app.use(urlencoded({ extended: true }));
 app.set("trust proxy", true);
 
 // index route
@@ -19,12 +21,15 @@ app.get("/api/hello", async (req, res) => {
   const clientIp = req.ip || req.socket.remoteAddress;
 
   try {
-    console.log(clientIp);
-    const response = await axios.get(
+    const response = await fetch(
       `http://api.weatherapi.com/v1/current.json?key=${process.env.WEATHER_API_KEY}&q=${clientIp}&aqi=no`
     );
-    const temperature = response.current.temp_c;
-    const location = response.location.name || "Unknown Location";
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data = await response.json();
+    const temperature = data.current.temp_c;
+    const location = data.location.name || "Unknown Location";
 
     res.status(200).json({
       client_ip: clientIp,
