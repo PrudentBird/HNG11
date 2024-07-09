@@ -2,7 +2,7 @@ import React from "react";
 import "./Nav.scss";
 import Logo from "../../assets/Logo.png";
 import { ShoppingBag, CircleUserRound, Search } from "lucide-react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Nav = () => {
   const navigate = useNavigate();
@@ -10,13 +10,14 @@ const Nav = () => {
   const handleCheckout = () => {
     navigate("/checkout");
   };
+
   return (
     <div className="navWrapp">
       <div className="navWrapped">
         <nav>
-          <div className="logoWrap">
+          <Link to="/" className="logoWrap">
             <img src={Logo} alt="" />
-          </div>
+          </Link>
           <div className="navWrap">
             <div className="inputWrap">
               <Search />
