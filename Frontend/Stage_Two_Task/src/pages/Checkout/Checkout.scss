@@ -156,101 +156,99 @@
             flex-direction: column;
             gap: 1rem;
 
-              .shipmentWrapper {
+            .shipmentWrapper {
+              display: flex;
+              width: 100%;
+              align-items: center;
+              justify-content: space-between;
+              gap: 1rem;
+              padding: 1.5rem;
+              border-radius: 0.5rem;
+              border: 1px solid #d1d1d8;
+              cursor: pointer;
+
+              svg {
+                width: 1.5rem;
+                height: 1.5rem;
+              }
+
+              .shipmentWrap {
                 display: flex;
                 width: 100%;
                 align-items: center;
                 justify-content: space-between;
-                gap: 1rem;
-                padding: 1.5rem;
-                border-radius: 0.5rem;
-                border: 1px solid #d1d1d8;
-                cursor: pointer;
-                
-                svg {
-                  width: 1.5rem;
-                  height: 1.5rem;
-                }
-    
-                .shipmentWrap {
+
+                .shipment {
                   display: flex;
-                  width: 100%;
-                  align-items: center;
-                  justify-content: space-between;
-    
-                  .shipment {
-                    display: flex;
-                    gap: 1rem;
-    
-                    p {
-                      font-weight: 600;
-                      color: #99A0AD;
-                    }
+                  gap: 1rem;
+
+                  p {
+                    font-weight: 600;
+                    color: #99a0ad;
                   }
-    
-                  .shipmentDate {
-                    span {
-                      font-size: 1rem;
-                      font-weight: 600;
-                      color: #99A0AD;
-                    }
-
-                    div {
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        gap: 0.5rem;
-                        color: #99A0AD;
-
-                        span {
-                            position: relative;
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-
-                            svg {
-                                color: #99A0AD;
-                                width: 1rem;
-                                height: 1rem;
-                            }
-
-                            input {
-                                position: absolute;
-                                top: 0;
-                                right: 0;
-                                opacity: 0;
-                            }
-                        }
-                    }
-                  }
-
                 }
-                .active {
-                  .shipment {
-                    p {
-                      color: #17183B;
-                    }
+
+                .shipmentDate {
+                  span {
+                    font-size: 1rem;
+                    font-weight: 600;
+                    color: #99a0ad;
                   }
 
-                  .shipmentDate {
+                  div {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    gap: 0.5rem;
+                    color: #99a0ad;
+
                     span {
-                      color: #17183B;
-                    }
+                      position: relative;
+                      display: flex;
+                      align-items: center;
+                      justify-content: center;
 
-                    div {
-                      color: #17183B;
+                      svg {
+                        color: #99a0ad;
+                        width: 1rem;
+                        height: 1rem;
+                      }
 
-                      span {
-                          svg {
-                              color: #17183B;
-                          }
+                      input {
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        opacity: 0;
                       }
                     }
                   }
                 }
               }
-          }
+              .active {
+                .shipment {
+                  p {
+                    color: #17183b;
+                  }
+                }
 
+                .shipmentDate {
+                  span {
+                    color: #17183b;
+                  }
+
+                  div {
+                    color: #17183b;
+
+                    span {
+                      svg {
+                        color: #17183b;
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
         }
 
         .stepsCta {
