@@ -1,13 +1,12 @@
 import React from "react";
 import "./Nav.scss";
 import Logo from "../../assets/Logo.png";
-import { ShoppingBag, Heart, CircleUserRound, Search } from "lucide-react";
+import { ShoppingBag, CircleUserRound, Search } from "lucide-react";
 
 const Nav = () => {
   return (
     <div className="navWrapp">
       <div className="navWrapped">
-
       <nav>
         <div className="logoWrap">
           <img src={Logo} alt="" />
@@ -20,10 +19,6 @@ const Nav = () => {
           <ul className="ctaLinks">
             <li className="ctaLink">
               <ShoppingBag />
-              <span></span>
-            </li>
-            <li className="ctaLink">
-              <Heart />
               <span></span>
             </li>
             <li className="ctaLink">

@@ -130,27 +130,37 @@
           width: 100%;
 
           div {
+            color: #6C6C6C;
             span {
+              color: #000;
               font-size: 1.25rem;
               font-weight: 600;
             }
           }
 
-          select {
-            font-size: 1rem;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            width: 16.25rem;
-            cursor: pointer;
-            padding: 0.75rem;
-            background: #fcfcfc;
-            border: none;
-            outline: none;
+          .options {
+            button {
+              display: none;
+            }
 
-            &:focus {
-              border: none;
-              outline: none;
+            div {
+              select {
+                font-size: 1rem;
+                font-weight: 500;
+                display: flex;
+                align-items: center;
+                width: 16.25rem;
+                cursor: pointer;
+                padding: 0.75rem;
+                background: #fcfcfc;
+                border: none;
+                outline: none;
+
+                &:focus {
+                  border: none;
+                  outline: none;
+                }
+              }
             }
           }
         }
@@ -185,6 +195,91 @@
           .first {
             background: #002147;
             color: #fff;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .productsWrapp {
+    .productsWrap {
+      padding: 0 1rem 2rem 1rem;
+      max-width: unset;
+
+      .breadcrumbsWrap {
+        gap: 0.5rem;
+        padding: 0;
+        padding-bottom: 1rem;
+
+        svg {
+          width: 1.125rem;
+          height: 1.125rem;
+        }
+      }
+
+      .productsContentWrap {
+        .filtersWrap {
+          display: none;
+        }
+
+        .productsContent {
+          .header {
+            flex-direction: column-reverse;
+            align-items: flex-start;
+            gap: 1rem;
+
+            .options {
+              display: flex;
+              width: 100%;
+              gap: 1rem;
+              align-items: center;
+              justify-content: center;
+
+              button {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                background: none;
+                border: 1px solid #d4d4d4;
+                width: 100%;
+                padding: 0 0.75rem;
+                height: 3.5rem;
+                border-radius: 0.5rem;
+                font-size: 0.9375rem;
+
+                svg {
+                  width: 1.125rem;
+                  height: 1.125rem;
+                }
+              }
+
+              div {
+                border: 1px solid #d4d4d4;
+                border-radius: 0.5rem;
+                width: 100%;
+                height: 3.5rem;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                select {
+                  padding: 0 0.75rem;
+                  width: 100%;
+                  margin-right: 0.75rem;
+                }
+              }
+            }
+          }
+
+          .productsWrapper {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+
+            div:last-child {
+              display: none;
+            }
           }
         }
       }

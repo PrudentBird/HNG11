@@ -82,3 +82,32 @@
     }
   }
 }
+
+@media screen and (max-width: 768px) {
+  .footerWrapp {
+    .footerWrapped {
+      padding: 0 1rem;
+
+      footer {
+        gap: 2rem;
+        padding: 2rem 0;
+
+        .footerWrap {
+          flex-direction: column;
+          gap: 2rem;
+
+          .logoWrap {
+            width: unset;
+          }
+
+          .footerNavWrap {
+            justify-content: space-between;
+            .footerNav {
+              width: unset;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -7,6 +7,7 @@ import {
   ChevronRight,
   ChevronUp,
   Search,
+  Settings2,
 } from "lucide-react";
 import Product from "../../components/Product/Product";
 import products from "../../data/products";
@@ -86,19 +87,26 @@ const ProductListing = () => {
                 <ChevronDown />
               </div>
             </div>
-
             <div className="productsContent">
               <div className="header">
                 <div>
                   Selected Products: <span>146</span>
                 </div>
-                <select name="quickFilter" id="">
-                  {filters.map((filter) => (
-                    <option key={filter} value={filter}>
-                      {filter}
-                    </option>
-                  ))}
-                </select>
+                <div className="options">
+                  <button className="quickFilter">
+                    Filters
+                    <Settings2 />
+                  </button>
+                  <div>
+                    <select name="quickFilter" id="">
+                      {filters.map((filter) => (
+                        <option key={filter} value={filter}>
+                          {filter}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
               </div>
               <div className="productsWrapper">
                 {products.map((product) => (
