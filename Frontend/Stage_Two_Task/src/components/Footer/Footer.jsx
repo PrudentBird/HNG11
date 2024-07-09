@@ -1,6 +1,6 @@
 import React from "react";
 import "./Footer.scss";
-import Logo from "../../assets/Logo.png";
+import Logo from "../../assets/LogoWhite.png";
 import { Facebook, Instagram, Twitter } from "lucide-react";
 import { FaTiktok } from "react-icons/fa6";
 
