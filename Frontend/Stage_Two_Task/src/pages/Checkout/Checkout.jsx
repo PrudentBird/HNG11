@@ -9,7 +9,11 @@ import {
   Truck,
   X,
 } from "lucide-react";
-import { MdRadioButtonChecked, MdRadioButtonUnchecked } from "react-icons/md";
+import {
+  MdCheckBox,
+  MdRadioButtonChecked,
+  MdRadioButtonUnchecked,
+} from "react-icons/md";
 import Footer from "../../components/Footer/Footer";
 import { useMediaQuery } from "react-responsive";
 import summary from "../../data/summary";
@@ -17,6 +21,11 @@ import summary from "../../data/summary";
 const Checkout = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [shipmentOption, setShipmentOption] = useState(null);
+
+  const [cardHolderName, setCardHolderName] = useState("");
+  const [cardNumber, setCardNumber] = useState("");
+  const [cardExpiry, setCardExpiry] = useState("");
+  const [cardCvv, setCardCvv] = useState("");
 
   const handleShipmentOption = (option) => {
     setShipmentOption(option);
@@ -29,6 +38,25 @@ const Checkout = () => {
     setCurrentStep(currentStep - 1);
   };
   const isMobile = useMediaQuery({ query: "(max-width: 900px)" });
+
+  const formatCardNumber = (number) => {
+    let digitsOnly = "";
+    for (let i = 0; i < number.length; i++) {
+      if (!isNaN(number[i]) && number[i] !== " ") {
+        digitsOnly += number[i];
+      }
+    }
+    digitsOnly = digitsOnly.slice(0, 16);
+
+    let formattedNumber = "";
+    for (let i = 0; i < digitsOnly.length; i++) {
+      if (i > 0 && i % 4 === 0) {
+        formattedNumber += " ";
+      }
+      formattedNumber += digitsOnly[i];
+    }
+    return formattedNumber;
+  };
 
   return (
     <>
@@ -447,15 +475,90 @@ const Checkout = () => {
                           </svg>
                         </div>
                       </div>
-
                       <div className="creditCardInfo">
-                        <span>1234 5678 9123 4567</span>
+                        <span>
+                          {cardNumber === ""
+                            ? "1234 5678 9123 4567"
+                            : formatCardNumber(cardNumber)}
+                        </span>
                         <div>
-                          <span>TOLU .L</span>
-                          <span>00/00</span>
+                          <span>
+                            {cardHolderName === "" ? "TOLU .L" : cardHolderName}
+                          </span>
+                          <span>
+                            {cardExpiry === "" ? "00/00" : cardExpiry}
+                          </span>
                         </div>
                       </div>
                     </div>
+                    <form action="">
+                      <div className="inputWrap">
+                        <input
+                          type="text"
+                          placeholder="Cardholder Name"
+                          onChange={(e) => setCardHolderName(e.target.value)}
+                        />
+                        <input
+                          type="text"
+                          placeholder="Card Number"
+                          value={formatCardNumber(cardNumber)}
+                          onChange={(e) => setCardNumber(e.target.value)}
+                        />
+                        <span>
+                          <input
+                            type="text"
+                            placeholder="Exp. Date"
+                            value={cardExpiry}
+                            onChange={(e) => {
+                              let value = e.target.value;
+                              let filteredValue = "";
+                              for (let i = 0; i < value.length; i++) {
+                                if (
+                                  (value[i] >= "0" && value[i] <= "9") ||
+                                  value[i] === "/"
+                                ) {
+                                  filteredValue += value[i];
+                                }
+                              }
+
+                              value = filteredValue;
+                              if (value.length === 2) {
+                                if (
+                                  cardExpiry.length === 3 &&
+                                  value[2] !== "/"
+                                ) {
+                                  value = value[0] + value[1];
+                                } else if (value[1] !== "/") {
+                                  value += "/";
+                                }
+                              }
+                              if (value.length <= 5) {
+                                setCardExpiry(value);
+                              } else {
+                                setCardExpiry(cardExpiry);
+                              }
+                            }}
+                          />
+                          <input
+                            type="number"
+                            value={cardCvv}
+                            placeholder="CVV"
+                            onChange={(e) => {
+                              const value = e.target.value;
+                              if (value.length <= 3) {
+                                setCardCvv(value);
+                              } else {
+                                setCardCvv(cardCvv);
+                              }
+                            }}
+                          />
+                        </span>
+                      </div>
+                      <span>
+                        <MdCheckBox />
+                        <p>Same as billing address</p>
+                      </span>
+                    </form>
                   </div>
                 </div>
                 <div className="stepsCta">

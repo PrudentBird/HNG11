@@ -459,6 +459,65 @@
                 }
               }
             }
+
+            form {
+              display: flex;
+              flex-direction: column;
+              gap: 1rem;
+
+              .inputWrap {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+                padding-right: 10rem;
+
+                input {
+                  background: none;
+                  width: 100%;
+                  padding: 0.75rem 1rem;
+                  font-size: 1rem;
+                  color: #979797;
+                  border-radius: 0.5rem;
+                  border: 1px solid #cecece;
+
+                  &::-webkit-outer-spin-button,
+                  &::-webkit-inner-spin-button {
+                    -webkit-appearance: none;
+                    margin: 0;
+                  }
+
+                  &[type="number"] {
+                    appearance: textfield;
+                  }
+
+                  &:focus {
+                    border: 1px solid #001845;
+                  }
+                }
+
+                span {
+                  display: flex;
+                  gap: 1rem;
+                }
+              }
+
+              span {
+                display: flex;
+                gap: 0.5rem;
+                align-items: center;
+
+                svg {
+                  width: 1.5rem;
+                  height: 1.5rem;
+                  color: #001845;
+                }
+
+                p {
+                  font-size: 1rem;
+                  font-weight: 600;
+                }
+              }
+            }
           }
         }
 
@@ -591,6 +650,18 @@
                 }
               }
             }
+
+            .paymentWrap {
+              .creditCard {
+                align-self: center;
+              }
+              form {
+                .inputWrap {
+                  padding-right: unset;
+                }
+              }
+            }
+
           }
 
           .stepsCta {
