@@ -12,6 +12,8 @@ import {
 import { MdRadioButtonChecked, MdRadioButtonUnchecked } from "react-icons/md";
 import Footer from "../../components/Footer/Footer";
 import { useMediaQuery } from "react-responsive";
+import summary from "../../data/summary";
+
 const Checkout = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [shipmentOption, setShipmentOption] = useState(null);
@@ -317,33 +319,151 @@ const Checkout = () => {
                 </li>
               </ul>
               <div className="contentWrap">
-                <div className="content">
-                  <span>Summary</span>
-                  <ul>
-                    <li className="summaryWrapper">
-                      <div className="productImg"></div>
-                      <div
-                        className={`shipmentWrap ${
-                          shipmentOption === "free" ? "active" : ""
-                        }`}
-                      >
-                        <div className="shipment">
-                          <p>Free</p>
-                          <p>Regular shipment</p>
+                <div className="summaryContentWrap">
+                  <div className="summaryContent">
+                    <span>Summary</span>
+                    <ul>
+                      {summary.map((summaryData) => (
+                        <li className="summaryWrapper">
+                          <div className="productImg">
+                            <img src={summaryData.img} alt="" />
+                          </div>
+                          <div className="productInfo">
+                            <span>{summaryData.desc}</span>
+                            <p>{summaryData.price}</p>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                    <div className="summaryAddrWrap">
+                      <div className="summaryAddr">
+                        <span>Address</span>
+                        <p>1131 Random Street, Somewhereville, LG 40522</p>
+                      </div>
+                      <div className="summaryShipment">
+                        <span>Shipment method</span>
+                        <p>Free</p>
+                      </div>
+                      <div className="summaryPricing">
+                        <span>
+                          <p>Subtotal</p>
+                          <p>#1,638,000</p>
+                        </span>
+                        <div>
+                          <span>
+                            <p>Estimated Tax</p>
+                            <p>#4000</p>
+                          </span>
+                          <span>
+                            <p>Estimated shipping & Handling</p>
+                            <p>#10000</p>
+                          </span>
                         </div>
-                        <div className="shipmentDate">
-                          <span>17th July, 2024</span>
+                        <span className="total">
+                          <p>Total</p>
+                          <p>#1,652,000</p>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="paymentWrap">
+                    <div className="paymentHeaderWrap">
+                      <span>Payment</span>
+                      <ul className="paymentHeader">
+                        <li>Credit Card</li>
+                        <li>PayPal</li>
+                        <li>PayPal Credit</li>
+                      </ul>
+                    </div>
+                    <div className="creditCard">
+                      <div className="creditCardHeader">
+                        <div className="chip">
+                          <svg
+                            width="42"
+                            height="31"
+                            viewBox="0 0 42 31"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              fillRule="evenodd"
+                              clipRule="evenodd"
+                              d="M5 0.666992H12.832V9.89746L0 9.89746V5.66699C0 2.90557 2.23858 0.666992 5 0.666992ZM0 12.2052H12.832V19.1289H0V12.2052ZM0 21.4366V25.667C0 28.4284 2.23858 30.667 5 30.667H12.832V21.4366H0ZM26.832 30.667H15.1654V0.666992H37C39.7614 0.666992 42 2.90557 42 5.66699V9.89746L29.1654 9.89746L27.418 9.89746L26.832 9.89746V30.667ZM29.1654 12.2052H42V19.1289H29.1654V12.2052ZM29.1654 21.4366V30.667H37C39.7614 30.667 42 28.4284 42 25.667V21.4366H29.1654Z"
+                              fill="#DFDEDE"
+                            />
+                            <path
+                              fillRule="evenodd"
+                              clipRule="evenodd"
+                              d="M5 0.666992H12.832V9.89746L0 9.89746V5.66699C0 2.90557 2.23858 0.666992 5 0.666992ZM0 12.2052H12.832V19.1289H0V12.2052ZM0 21.4366V25.667C0 28.4284 2.23858 30.667 5 30.667H12.832V21.4366H0ZM26.832 30.667H15.1654V0.666992H37C39.7614 0.666992 42 2.90557 42 5.66699V9.89746L29.1654 9.89746L27.418 9.89746L26.832 9.89746V30.667ZM29.1654 12.2052H42V19.1289H29.1654V12.2052ZM29.1654 21.4366V30.667H37C39.7614 30.667 42 28.4284 42 25.667V21.4366H29.1654Z"
+                              fill="url(#paint0_linear_61_4577)"
+                            />
+                            <defs>
+                              <linearGradient
+                                id="paint0_linear_61_4577"
+                                x1="21"
+                                y1="0.666992"
+                                x2="21"
+                                y2="30.667"
+                                gradientUnits="userSpaceOnUse"
+                              >
+                                <stop stopColor="white" />
+                                <stop
+                                  offset="1"
+                                  stopColor="white"
+                                  stopOpacity="0"
+                                />
+                              </linearGradient>
+                            </defs>
+                          </svg>
+                        </div>
+                        <div className="visa">
+                          <svg
+                            width="76"
+                            height="25"
+                            viewBox="0 0 76 25"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              d="M32.7869 23.736H26.7046L30.5089 0.422678H36.5909L32.7869 23.736Z"
+                              fill="white"
+                            />
+                            <path
+                              d="M54.8356 0.992601C53.6359 0.520889 51.7331 6.10352e-05 49.3803 6.10352e-05C43.3738 6.10352e-05 39.1441 3.17447 39.1182 7.71293C39.0683 11.0614 42.1465 12.9212 44.4488 14.0377C46.8019 15.1786 47.6018 15.9232 47.6018 16.9401C47.5779 18.502 45.7004 19.2219 43.9492 19.2219C41.5209 19.2219 40.2198 18.8507 38.2424 17.9818L37.4415 17.6093L36.5904 22.8426C38.0169 23.4868 40.6452 24.0583 43.3738 24.0834C49.7558 24.0834 53.9106 20.9581 53.9598 16.1217C53.9841 13.4677 52.3587 11.4342 48.8544 9.7725C46.7271 8.7058 45.4243 7.98653 45.4243 6.8951C45.4492 5.90289 46.5262 4.88661 48.9276 4.88661C50.9049 4.83684 52.3577 5.30789 53.4583 5.77927L54.0084 6.02683L54.8356 0.992601Z"
+                              fill="white"
+                            />
+                            <path
+                              d="M62.9196 15.4769C63.4205 14.1376 65.348 8.95403 65.348 8.95403C65.3227 9.00381 65.8479 7.58999 66.1482 6.72206L66.5733 8.73087C66.5733 8.73087 67.7251 14.3113 67.9752 15.4769C67.0246 15.4769 64.121 15.4769 62.9196 15.4769ZM70.4275 0.422678H65.7228C64.272 0.422678 63.1698 0.843955 62.5438 2.35699L53.5094 23.7357H59.8913C59.8913 23.7357 60.942 20.8582 61.1678 20.2385C61.868 20.2385 68.0763 20.2385 68.977 20.2385C69.1516 21.057 69.7027 23.7357 69.7027 23.7357H75.3343L70.4275 0.422678Z"
+                              fill="white"
+                            />
+                            <path
+                              d="M21.623 0.422882L15.6665 16.3203L15.0156 13.0961C13.9143 9.37585 10.4606 5.33383 6.60642 3.32403L12.0624 23.7115H18.4943L28.0545 0.422882H21.623Z"
+                              fill="white"
+                            />
+                            <path
+                              d="M10.1369 0.422323H0.351089L0.250977 0.893375C7.8845 2.82802 12.94 7.49141 15.0171 13.0966L12.8898 2.38202C12.5396 0.893046 11.4633 0.471439 10.1369 0.422323Z"
+                              fill="white"
+                            />
+                          </svg>
                         </div>
                       </div>
-                    </li>
-                  </ul>
+
+                      <div className="creditCardInfo">
+                        <span>1234 5678 9123 4567</span>
+                        <div>
+                          <span>TOLU .L</span>
+                          <span>00/00</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <div className="stepsCta">
                   <button className="back" onClick={prevStep}>
                     Back
                   </button>
                   <button className="next" onClick={nextStep}>
-                    Next
+                    {currentStep === 2 ? "Pay" : "Next"}
                   </button>
                 </div>
               </div>
