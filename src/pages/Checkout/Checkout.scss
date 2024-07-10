@@ -197,7 +197,7 @@
 
                   div {
                     display: flex;
-                    align-items: center;
+                    align-items: flex-end;
                     justify-content: center;
                     gap: 0.5rem;
                     color: #99a0ad;
@@ -318,6 +318,35 @@
                   justify-content: space-between;
                 }
               }
+            }
+
+            ul {
+                .shipmentWrapper {
+                    align-items: flex-start;
+                  .shipmentWrap {
+                    flex-direction: column;
+                    align-items: flex-start;
+                    gap: 0.5rem;
+
+                    .shipment {
+                      flex-direction: row-reverse;
+                      width: 100%;
+                      justify-content: space-between;
+                    }
+
+                    .shipmentDate {
+                        width: 100%;
+                        
+                      div {
+                        border-radius: 0.25rem;
+                        padding: 0.25rem 0.5rem;
+                        border: 1px solid #D1D1D8;
+                        width: 100%;
+                        justify-content: space-between;
+                      }
+                    }
+                  }
+                }
             }
           }
 

@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { MdRadioButtonChecked, MdRadioButtonUnchecked } from "react-icons/md";
 import Footer from "../../components/Footer/Footer";
+import { useMediaQuery } from "react-responsive";
 const Checkout = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [shipmentOption, setShipmentOption] = useState(null);
@@ -25,6 +26,8 @@ const Checkout = () => {
   const prevStep = () => {
     setCurrentStep(currentStep - 1);
   };
+  const isMobile = useMediaQuery({ query: "(max-width: 900px)" });
+
   return (
     <>
       <Nav />
@@ -133,9 +136,13 @@ const Checkout = () => {
                   </div>
                 </div>
                 <div className="stepsCta">
-                  <button className="back" onClick={prevStep}>
-                    Back
-                  </button>
+                  {currentStep === 0 ? (
+                    ""
+                  ) : (
+                    <button className="back" onClick={prevStep}>
+                      Back
+                    </button>
+                  )}
                   <button className="next" onClick={nextStep}>
                     Next
                   </button>
@@ -146,18 +153,26 @@ const Checkout = () => {
           {currentStep === 1 ? (
             <div className="stepWrap">
               <ul className="header">
-                <li className="active">
-                  <MapPinned />
+                <li
+                  className={
+                    (!isMobile && currentStep === 0) || isMobile ? "active" : ""
+                  }
+                >
+                  {currentStep === 1 && isMobile ? <Truck /> : <MapPinned />}
                   <div>
-                    <p>Step 1</p>
-                    <span>Address</span>
+                    <p>{currentStep === 1 && isMobile ? "Step 2" : "Step 1"}</p>
+                    <span>
+                      {currentStep === 1 && isMobile ? "Shipping" : "Address"}
+                    </span>
                   </div>
                 </li>
-                <li>
-                  <Truck />
+                <li className={!isMobile && currentStep === 1 ? "active" : ""}>
+                  {currentStep === 1 && isMobile ? <CreditCard /> : <Truck />}
                   <div>
-                    <p>Step 2</p>
-                    <span>Shipping</span>
+                    <p>{currentStep === 1 && isMobile ? "Step 3" : "Step 2"}</p>
+                    <span>
+                      {currentStep === 1 && isMobile ? "Payment" : "Shipping"}
+                    </span>
                   </div>
                 </li>
                 <li>
@@ -248,6 +263,76 @@ const Checkout = () => {
                               <input type="date" name="" id="" />
                             </span>
                           </div>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <div className="stepsCta">
+                  <button className="back" onClick={prevStep}>
+                    Back
+                  </button>
+                  <button className="next" onClick={nextStep}>
+                    Next
+                  </button>
+                </div>
+              </div>
+            </div>
+          ) : null}
+          {currentStep === 2 ? (
+            <div className="stepWrap">
+              <ul className="header">
+                <li
+                  className={
+                    (!isMobile && currentStep === 0) || isMobile ? "active" : ""
+                  }
+                >
+                  {currentStep === 2 && isMobile ? (
+                    <CreditCard />
+                  ) : (
+                    <MapPinned />
+                  )}
+                  <div>
+                    <p>{currentStep === 2 && isMobile ? "Step 3" : "Step 1"}</p>
+                    <span>
+                      {currentStep === 2 && isMobile ? "Payment" : "Address"}
+                    </span>
+                  </div>
+                </li>
+                <li className={!isMobile && currentStep === 1 ? "active" : ""}>
+                  {currentStep === 2 && isMobile ? "" : <Truck />}
+                  <div>
+                    <p>{currentStep === 2 && isMobile ? "" : "Step 2"}</p>
+                    <span>
+                      {currentStep === 2 && isMobile ? "" : "Shipping"}
+                    </span>
+                  </div>
+                </li>
+                <li className={!isMobile && currentStep === 2 ? "active" : ""}>
+                  <CreditCard />
+                  <div>
+                    <p>Step 3</p>
+                    <span>Payment</span>
+                  </div>
+                </li>
+              </ul>
+              <div className="contentWrap">
+                <div className="content">
+                  <span>Summary</span>
+                  <ul>
+                    <li className="summaryWrapper">
+                      <div className="productImg"></div>
+                      <div
+                        className={`shipmentWrap ${
+                          shipmentOption === "free" ? "active" : ""
+                        }`}
+                      >
+                        <div className="shipment">
+                          <p>Free</p>
+                          <p>Regular shipment</p>
+                        </div>
+                        <div className="shipmentDate">
+                          <span>17th July, 2024</span>
                         </div>
                       </div>
                     </li>
