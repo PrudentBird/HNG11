@@ -41,6 +41,7 @@ const Checkout = () => {
   const prevStep = () => {
     setCurrentStep(currentStep - 1);
   };
+  
   const isMobile = useMediaQuery({ query: "(max-width: 900px)" });
 
   const formatCardNumber = (number) => {

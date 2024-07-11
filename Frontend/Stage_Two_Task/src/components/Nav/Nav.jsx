@@ -7,8 +7,8 @@ import { Link, useNavigate } from "react-router-dom";
 const Nav = () => {
   const navigate = useNavigate();
 
-  const handleCheckout = () => {
-    navigate("/checkout");
+  const handleCart = () => {
+    navigate("/cart");
   };
 
   return (
@@ -24,7 +24,7 @@ const Nav = () => {
               <input type="search" name="" id="" placeholder="Search" />
             </div>
             <ul className="ctaLinks">
-              <li className="ctaLink" onClick={handleCheckout}>
+              <li className="ctaLink" onClick={handleCart}>
                 <ShoppingBag />
                 <span></span>
               </li>
