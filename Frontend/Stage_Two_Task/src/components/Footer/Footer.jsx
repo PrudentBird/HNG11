@@ -3,6 +3,7 @@ import "./Footer.scss";
 import Logo from "../../assets/LogoWhite.png";
 import { Facebook, Instagram, Twitter } from "lucide-react";
 import { FaTiktok } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -10,7 +11,7 @@ const Footer = () => {
       <div className="footerWrapped">
         <footer>
           <div className="footerWrap">
-            <div className="logoWrap">
+            <Link to='/' className="logoWrap">
               <div>
                 <img src={Logo} alt="" />
               </div>
@@ -18,7 +19,7 @@ const Footer = () => {
                 We are Nigeria's finest gadget hub, where comfort,<br />quality and
                 affordability meets world.
               </span>
-            </div>
+            </Link>
             <div className="footerNavWrap">
               <ul className="footerNav">
                 <p>Services</p>

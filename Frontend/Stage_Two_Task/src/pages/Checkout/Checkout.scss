@@ -551,11 +551,85 @@
             color: #fff;
           }
         }
+
+        .verifyWrap {
+          padding: 4.75rem 0;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+
+          .verifyContent {
+            gap: 1.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            padding: 0 15rem;
+
+            svg {
+              width: 8.75rem;
+              height: 8.75rem;
+              color: #192180b2;
+            }
+
+            div {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: center;
+              gap: 1.75rem;
+
+              span {
+                text-align: center;
+                font-size: 2.25rem;
+                font-weight: 500;
+                color: #272727;
+              }
+
+              p {
+                font-size: 1.25rem;
+                font-weight: 400;
+                text-align: center;
+                color: #001845;
+              }
+            }
+
+            p {
+              font-size: 1.25rem;
+              text-align: center;
+              font-weight: 400;
+              color: #818181;
+            }
+
+            button {
+              background: #001845;
+              border: none;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              width: 21.5625rem;
+              height: 3.5rem;
+              font-size: 1.25rem;
+              color: #fff;
+              font-weight: 500;
+              border-radius: 0.5rem;
+              cursor: pointer;
+            }
+
+            .receipt {
+              cursor: pointer;
+              font-size: 1.125rem;
+              color: #001845;
+              font-weight: 400;
+              border-bottom: 1px solid #001845;
+            }
+          }
+        }
       }
     }
   }
 }
-
 
 @media screen and (max-width: 900px) {
   .checkoutWrapp {
@@ -627,7 +701,7 @@
           .summaryContentWrap {
             flex-direction: column;
             gap: 2.5rem;
-            
+
             .summaryContent {
               width: 100%;
               padding: 0;
@@ -667,7 +741,6 @@
                 }
               }
             }
-
           }
 
           .stepsCta {
@@ -680,6 +753,33 @@
               width: 100%;
               height: 3.5rem;
               padding: 0;
+            }
+          }
+
+          .verifyWrap {
+            padding: 2rem 0;
+
+            .verifyContent {
+              padding: 0;
+
+              div {
+                gap: 0.875rem;
+                span {
+                  font-size: 1.625rem;
+                }
+
+                p {
+                  font-size: 1rem;
+                }
+              }
+
+              p {
+                font-size: 1rem;
+              }
+
+              button {
+                font-size: 1.25rem;
+              }
             }
           }
         }

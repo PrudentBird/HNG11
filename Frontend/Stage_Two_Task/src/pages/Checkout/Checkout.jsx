@@ -3,6 +3,7 @@ import "./Checkout.scss";
 import Nav from "../../components/Nav/Nav";
 import {
   ChevronDown,
+  CircleCheckIcon,
   CreditCard,
   MapPinned,
   Pencil,
@@ -17,8 +18,11 @@ import {
 import Footer from "../../components/Footer/Footer";
 import { useMediaQuery } from "react-responsive";
 import summary from "../../data/summary";
+import { useNavigate } from "react-router";
 
 const Checkout = () => {
+  const navigate = useNavigate();
+
   const [currentStep, setCurrentStep] = useState(0);
   const [shipmentOption, setShipmentOption] = useState(null);
 
@@ -56,6 +60,10 @@ const Checkout = () => {
       formattedNumber += digitsOnly[i];
     }
     return formattedNumber;
+  };
+
+  const handlePayCta = () => {
+    navigate("/");
   };
 
   return (
@@ -568,6 +576,64 @@ const Checkout = () => {
                   <button className="next" onClick={nextStep}>
                     {currentStep === 2 ? "Pay" : "Next"}
                   </button>
+                </div>
+              </div>
+            </div>
+          ) : null}
+          {currentStep === 3 ? (
+            <div className="stepWrap">
+              <ul className="header">
+                <li
+                  className={
+                    (!isMobile && currentStep === 0) || isMobile ? "active" : ""
+                  }
+                >
+                  {currentStep === 3 && isMobile ? (
+                    <CreditCard />
+                  ) : (
+                    <MapPinned />
+                  )}
+                  <div>
+                    <p>{currentStep === 3 && isMobile ? "Step 3" : "Step 1"}</p>
+                    <span>
+                      {currentStep === 3 && isMobile ? "Payment" : "Address"}
+                    </span>
+                  </div>
+                </li>
+                <li className={!isMobile && currentStep === 1 ? "active" : ""}>
+                  {currentStep === 3 && isMobile ? "" : <Truck />}
+                  <div>
+                    <p>{currentStep === 3 && isMobile ? "" : "Step 2"}</p>
+                    <span>
+                      {currentStep === 3 && isMobile ? "" : "Shipping"}
+                    </span>
+                  </div>
+                </li>
+                <li className={!isMobile && currentStep === 3 ? "active" : ""}>
+                  <CreditCard />
+                  <div>
+                    <p>Step 3</p>
+                    <span>Payment</span>
+                  </div>
+                </li>
+              </ul>
+              <div className="contentWrap">
+                <div className="verifyWrap">
+                  <div className="verifyContent">
+                    <CircleCheckIcon />
+                    <div>
+                      <span>Payment Confirmed</span>
+                      <p>ORDER #2039</p>
+                    </div>
+                    <p>
+                      Thank you for buying from Gadgetry. Now that your order is
+                      confirmed it will be ready to ship in 7 working days.
+                      Please check your inbox in the future for your order
+                      updates.
+                    </p>
+                    <button onClick={handlePayCta}>Back to shopping</button>
+                    <span className="receipt">Print receipt</span>
+                  </div>
                 </div>
               </div>
             </div>
