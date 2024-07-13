@@ -1,0 +1,293 @@
+.cartWrapper {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+
+  .cartWrap {
+    display: flex;
+    flex-direction: column;
+    max-width: 1440px;
+    width: 100%;
+    padding: 5rem;
+    gap: 2.5rem;
+
+    .header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2.5rem;
+
+      span {
+        text-align: center;
+        color: #272727;
+        font-size: 1.625rem;
+        font-weight: 500;
+        font-weight: 600;
+      }
+
+      .cta {
+        text-align: center;
+        font-size: 1.125rem;
+        color: #001845;
+        cursor: pointer;
+        border-bottom: 1px solid #001845;
+      }
+    }
+
+    .contentWrap {
+      display: flex;
+      flex-direction: column;
+      gap: 3.125rem;
+
+      .content {
+        display: flex;
+        flex-direction: column;
+
+        .heading {
+          display: flex;
+          width: 100%;
+          justify-content: space-between;
+          padding-bottom: 1rem;
+          border-bottom: 1px solid #778092;
+
+          span {
+            font-weight: 500;
+
+            &:first-child {
+              width: 30%;
+            }
+          }
+        }
+        ul {
+          display: flex;
+          flex-direction: column;
+          width: 100%;
+
+          li {
+            padding: 2.5rem 0;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #778092;
+
+            .cartMainWrap {
+              width: 30%;
+
+              .cartMain {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                gap: 1.5rem;
+
+                .cartImg {
+                  overflow: hidden;
+                  width: 10rem;
+                  height: 10rem;
+                  overflow: hidden;
+                  max-width: 10rem;
+                  max-height: 10rem;
+
+                  img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: contain;
+                    object-position: center;
+                  }
+                }
+
+                span {
+                  display: flex;
+                  flex-direction: column;
+                  gap: 1.125rem;
+
+                  p {
+                    color: #272727;
+                    font-weight: 600;
+                    font-size: 1.625rem;
+                  }
+
+                  button {
+                    font-size: 1.125rem;
+                    color: #001845;
+                    display: flex;
+                    width: max-content;
+                    background: none;
+                    border: none;
+                    cursor: pointer;
+                    border-bottom: 1px solid #778092;
+                  }
+                }
+              }
+            }
+
+            .cartSide {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              width: 50%;
+
+              p {
+                font-size: 1.125rem;
+                font-weight: 500;
+                user-select: none;
+              }
+
+              .quantity {
+                display: flex;
+                align-items: flex-end;
+                border: 1px solid #001845;
+                padding: 0.25rem;
+                gap: 0.5rem;
+
+                svg {
+                  cursor: pointer;
+                  width: 1rem;
+                  height: 1rem;
+                }
+                span {
+                  user-select: none;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .checkoutCta {
+        display: flex;
+        align-self: flex-end;
+        gap: 9.375rem;
+
+        div {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+          gap: 0.5rem;
+
+          span {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #272727;
+          }
+
+          p {
+            color: #9e9e9e;
+          }
+        }
+
+        button {
+          width: 12.5rem;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border: none;
+          background: #00143a;
+          border-radius: 0.625rem;
+          color: #fff;
+          cursor: pointer;
+          font-size: 1.25rem;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .cartWrapper {
+    .cartWrap {
+      padding: 1rem;
+      gap: 1.5rem;
+
+      .header {
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between;
+
+        span {
+          font-size: 1.25rem;
+        }
+
+        .cta {
+          font-size: 1rem;
+        }
+      }
+
+      .contentWrap {
+        .content {
+          .heading {
+            span:nth-child(3),
+            span:nth-child(4) {
+              display: none;
+            }
+          }
+          ul {
+            li {
+              gap: 1.5rem;
+              align-items: flex-start;
+
+              .cartMainWrap {
+                width: 100%;
+
+                .cartMain {
+                  gap: 0.5rem;
+
+                  .cartImg {
+                    width: unset;
+                    height: unset;
+                    min-width: 5rem;
+                    min-height: 5rem;
+
+                    img {
+                      width: 5rem;
+                      height: 5rem;
+                    }
+                  }
+
+                  span {
+                    height: 5rem;
+                    justify-content: space-between;
+                    align-self: flex-start;
+
+                    p {
+                      font-size: 1.25rem;
+                    }
+                  }
+                }
+              }
+
+              .cartSide {
+                flex-direction: column-reverse;
+                align-items: flex-end;
+                height: 5rem;
+                width: unset;
+              }
+            }
+          }
+        }
+
+        .checkoutCta {
+          flex-direction: column;
+          width: 100%;
+          gap: 1.5rem;
+
+          div {
+            align-items: center;
+            justify-content: center;
+
+            span,
+            p {
+              text-align: center;
+            }
+          }
+
+          button {
+            width: 100%;
+            height: 3.5rem;
+          }
+        }
+      }
+    }
+  }
+}
