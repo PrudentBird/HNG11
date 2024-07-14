@@ -108,6 +108,7 @@
               span {
                 font-size: 1rem;
                 font-weight: 700;
+                text-transform: capitalize;
 
                 &:last-child {
                   font-size: 0.75rem;
@@ -187,6 +188,12 @@
           align-self: center;
           gap: 1rem;
 
+          svg {
+            cursor: pointer;
+            width: 1rem;
+            height: 1rem;
+          }
+
           .page {
             display: flex;
             align-items: center;
@@ -196,9 +203,10 @@
             height: 2rem;
             background: #f6f6f6;
             font-weight: 500;
+            cursor: pointer;
           }
 
-          .first {
+          .activePage {
             background: #002147;
             color: #fff;
           }

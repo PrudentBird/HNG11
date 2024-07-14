@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Checkout.scss";
 import Nav from "../../components/Nav/Nav";
 import {
@@ -17,19 +17,33 @@ import {
 } from "react-icons/md";
 import Footer from "../../components/Footer/Footer";
 import { useMediaQuery } from "react-responsive";
-import summary from "../../data/summary";
 import { useNavigate } from "react-router";
+import useCart from "../../hooks/useCart";
+import products from "../../data/products";
 
 const Checkout = () => {
   const navigate = useNavigate();
-
+  const { getCartItems } = useCart();
+  const [cartItems, setCartItems] = useState([]);
   const [currentStep, setCurrentStep] = useState(0);
   const [shipmentOption, setShipmentOption] = useState(null);
-
   const [cardHolderName, setCardHolderName] = useState("");
   const [cardNumber, setCardNumber] = useState("");
   const [cardExpiry, setCardExpiry] = useState("");
   const [cardCvv, setCardCvv] = useState("");
+
+  useEffect(() => {
+    try {
+      const cartItems = getCartItems();
+      setCartItems(cartItems);
+    } catch (error) {
+      console.error("Error fetching cart items:", error);
+    }
+  }, []);
+
+  const getProductDetailsById = (id) => {
+    return products.find((product) => product.id === id);
+  };
 
   const handleShipmentOption = (option) => {
     setShipmentOption(option);
@@ -41,7 +55,7 @@ const Checkout = () => {
   const prevStep = () => {
     setCurrentStep(currentStep - 1);
   };
-  
+
   const isMobile = useMediaQuery({ query: "(max-width: 900px)" });
 
   const formatCardNumber = (number) => {
@@ -62,6 +76,29 @@ const Checkout = () => {
     }
     return formattedNumber;
   };
+
+  const formatNumberWithCommas = (number) => {
+    const numberString = number.toString();
+    const [integerPart, decimalPart] = numberString.split(".");
+    let withCommas = "";
+    for (let i = 0; i < integerPart.length; i++) {
+      if (i > 0 && (integerPart.length - i) % 3 === 0) {
+        withCommas += ",";
+      }
+      withCommas += integerPart[i];
+    }
+    return decimalPart ? `${withCommas}.${decimalPart}` : withCommas;
+  };
+
+  const subTotal = cartItems.reduce((acc, item) => {
+    const productDetails = getProductDetailsById(item.productId);
+    if (productDetails) {
+      const price = parseFloat(productDetails.price) || 0;
+      const quantity = parseInt(item.quantity, 10) || 0;
+      return acc + price * quantity;
+    }
+    return acc;
+  }, 0);
 
   const handlePayCta = () => {
     navigate("/");
@@ -360,17 +397,22 @@ const Checkout = () => {
                   <div className="summaryContent">
                     <span>Summary</span>
                     <ul>
-                      {summary.map((summaryData) => (
-                        <li className="summaryWrapper">
-                          <div className="productImg">
-                            <img src={summaryData.img} alt="" />
-                          </div>
-                          <div className="productInfo">
-                            <span>{summaryData.desc}</span>
-                            <p>{summaryData.price}</p>
-                          </div>
-                        </li>
-                      ))}
+                      {cartItems.map((cartItem) => {
+                        const productDetails = getProductDetailsById(
+                          cartItem.productId
+                        );
+                        return (
+                          <li className="summaryWrapper" key={cartItem.productId}>
+                            <div className="productImg">
+                              <img src={productDetails?.img} alt="" />
+                            </div>
+                            <div className="productInfo">
+                              <span>{productDetails?.desc}</span>
+                              <p>#{formatNumberWithCommas(productDetails?.price * cartItem.quantity)}</p>
+                            </div>
+                          </li>
+                        );
+                      })}
                     </ul>
                     <div className="summaryAddrWrap">
                       <div className="summaryAddr">
@@ -384,21 +426,21 @@ const Checkout = () => {
                       <div className="summaryPricing">
                         <span>
                           <p>Subtotal</p>
-                          <p>#1,638,000</p>
+                          <p>#{formatNumberWithCommas(subTotal)}</p>
                         </span>
                         <div>
                           <span>
                             <p>Estimated Tax</p>
-                            <p>#4000</p>
+                            <p>#{cartItems.length > 0 ? 4000 : 0}</p>
                           </span>
                           <span>
                             <p>Estimated shipping & Handling</p>
-                            <p>#10000</p>
+                            <p>#{cartItems.length > 0 ? 10000 : 0}</p>
                           </span>
                         </div>
                         <span className="total">
                           <p>Total</p>
-                          <p>#1,652,000</p>
+                          <p>#{formatNumberWithCommas(cartItems.length > 0 ? (subTotal + 14000) : 0)}</p>
                         </span>
                       </div>
                     </div>

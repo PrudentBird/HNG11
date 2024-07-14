@@ -1,37 +1,43 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./ProductListing.scss";
 import Nav from "../../components/Nav/Nav";
-import {
-  ChevronDown,
-  ChevronLeft,
-  ChevronRight,
-  ChevronUp,
-  Search,
-  Settings2,
-} from "lucide-react";
+import { ChevronLeft, ChevronRight, Search, Settings2 } from "lucide-react";
 import Product from "../../components/Product/Product";
 import products from "../../data/products";
+import categories from "../../data/categories";
 import Footer from "../../components/Footer/Footer";
 
-const phones = [
-  { brand: "Apple", quantity: 110 },
-  { brand: "Samsung", quantity: 125 },
-  { brand: "Xiaomi", quantity: 68 },
-  { brand: "Poco", quantity: 44 },
-  { brand: "OPPO", quantity: 36 },
-  { brand: "Honor", quantity: 10 },
-  { brand: "Motorola", quantity: 34 },
-  { brand: "Nokia", quantity: 22 },
-  { brand: "Realme", quantity: 35 },
-];
-
-const filters = [
-  "By lowest price",
-  "By highest price",
-];
+const filters = ["By lowest price", "By highest price"];
 
 const ProductListing = () => {
+  const [currentPage, setCurrentPage] = useState(1);
+  const [currentProducts, setCurrentProducts] = useState([]);
+  const productsPerPage = 12;
+  const totalPages = Math.ceil(products?.length / productsPerPage);
   
+  
+  useEffect(() => {
+    const indexOfLastProduct = currentPage * productsPerPage;
+    const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+
+
+    setCurrentProducts(
+      products?.slice(indexOfFirstProduct, indexOfLastProduct)
+    );
+  }, [currentPage]);
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) setCurrentPage(currentPage - 1);
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+  };
+
+  const handlePageClick = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
   return (
     <>
       <Nav />
@@ -48,42 +54,21 @@ const ProductListing = () => {
             <div className="filtersWrap">
               <div className="header">
                 <span>Brand</span>
-                <ChevronUp />
               </div>
               <div className="searchWrap">
                 <Search />
                 <input type="search" name="" id="" placeholder="Search" />
               </div>
               <div className="checkBoxWrap">
-                {phones.map((phone, index) => (
+                {categories.map((item, index) => (
                   <label key={index}>
-                    <input type="checkbox" name="phones" value={phone.brand} />
+                    <input type="checkbox" name="brand" value={item.name} />
                     <div>
-                      <span>{phone.brand}</span>
-                      <span>{phone.quantity}</span>
+                      <span>{item.name}</span>
+                      <span>{}</span>
                     </div>
                   </label>
                 ))}
-              </div>
-              <div className="header">
-                <span>Battery capacity</span>
-                <ChevronDown />
-              </div>
-              <div className="header">
-                <span>Screen type</span>
-                <ChevronDown />
-              </div>
-              <div className="header">
-                <span>Screen diagonal</span>
-                <ChevronDown />
-              </div>
-              <div className="header">
-                <span>Protection class</span>
-                <ChevronDown />
-              </div>
-              <div className="header">
-                <span>Built-in memory</span>
-                <ChevronDown />
               </div>
             </div>
             <div className="productsContent">
@@ -108,24 +93,28 @@ const ProductListing = () => {
                 </div>
               </div>
               <div className="productsWrapper">
-                {products.map((product, index) => (
-                    <Product
-                      img={product.img}
-                      desc={product.desc}
-                      price={product.price}
-                      id={product.id}
-                      key={index}
-                    />
+                {currentProducts.map((product, index) => (
+                  <Product
+                    img={product.img}
+                    desc={product.desc}
+                    price={product.price}
+                    id={product.id}
+                    key={index}
+                  />
                 ))}
               </div>
               <div className="footer">
-                <ChevronLeft />
-                <div className="page first">1</div>
-                <div className="page">2</div>
-                <div className="page">3</div>
-                <span>....</span>
-                <div className="page">12</div>
-                <ChevronRight />
+                <ChevronLeft onClick={handlePreviousPage} />
+                {Array.from({ length: totalPages }, (_, i) => (
+                  <div
+                    key={i + 1}
+                    className={`page ${currentPage === i + 1 ? "activePage" : ""}`}
+                    onClick={() => handlePageClick(i + 1)}
+                  >
+                    {i + 1}
+                  </div>
+                ))}
+                <ChevronRight onClick={handleNextPage} />
               </div>
             </div>
           </div>

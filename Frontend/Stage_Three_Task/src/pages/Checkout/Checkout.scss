@@ -285,6 +285,18 @@
                 border-radius: 0.75rem;
                 background: #f6f6f6;
 
+                .productImg {
+                  width: 2.5rem;
+                  height: 2.5rem;
+                  max-width: 2.5rem;
+                  max-height: 2.5rem;
+
+                  img {
+                    width: 100%;
+                    object-fit: cover;
+                    object-position: center;
+                  }
+                }
                 .productInfo {
                   display: flex;
                   align-items: center;

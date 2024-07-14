@@ -8,7 +8,7 @@ const AppLayout = ({ children }) => {
     <>
       {children}
       <Outlet />
-      <ToastContainer />
+      <ToastContainer position="bottom-center" />
     </>
   );
 };

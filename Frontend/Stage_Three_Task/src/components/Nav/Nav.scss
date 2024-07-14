@@ -64,6 +64,13 @@
 
           .ctaLink {
             cursor: pointer;
+            display: flex;
+            align-items: flex-end;
+
+            span {
+              font-size: 1rem;
+              font-weight: 600;
+            }
           }
         }
       }

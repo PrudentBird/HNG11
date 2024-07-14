@@ -7,14 +7,11 @@ const Product = ({ img, desc, price, id }) => {
   const navigate = useNavigate();
   const { addItemToCart } = useCart();
 
-  const handleProduct = (productId) => {
-    navigate(`/item/${productId}`);
-  };
   const formatNumberWithCommas = (number) => {
     const numberString = number.toString();
-
+    
     const [integerPart, decimalPart] = numberString.split(".");
-
+    
     let withCommas = "";
     for (let i = 0; i < integerPart.length; i++) {
       if (i > 0 && (integerPart.length - i) % 3 === 0) {
@@ -22,16 +19,22 @@ const Product = ({ img, desc, price, id }) => {
       }
       withCommas += integerPart[i];
     }
-
+    
     return decimalPart ? `${withCommas}.${decimalPart}` : withCommas;
   };
+  
+  const handleProduct = (e, productId) => {
+    e.stopPropagation()
+    navigate(`/item/${productId}`);
+  };
 
-  const handleAddToCart = (id) => {
+  const handleAddToCart = (e, id) => {
+    e.stopPropagation()
     addItemToCart(id);
   };
 
   return (
-    <div className="productWrap" onClick={() => handleProduct(id)}>
+    <div className="productWrap" onClick={(e) => handleProduct(e, id)}>
       <div className="imgWrap">
         <img src={img} alt="" />
       </div>
@@ -41,8 +44,7 @@ const Product = ({ img, desc, price, id }) => {
       </div>
       <button
         onClick={(e) => {
-          e.stopPropagation();
-          handleAddToCart(id);
+          handleAddToCart(e, id);
         }}
       >
         Add to cart

@@ -3,13 +3,10 @@ import "./Nav.scss";
 import Logo from "../../assets/Logo.png";
 import { ShoppingBag, CircleUserRound, Search } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
-import { useCartContext } from "../../contexts/CartContext";
 
 const Nav = () => {
   const navigate = useNavigate();
-  const { cartItemsCount } = useCartContext();
-
-  const handleCart = () => {
+  const handleCart = () => {  
     navigate("/cart");
   };
 
@@ -28,7 +25,7 @@ const Nav = () => {
             <ul className="ctaLinks">
               <li className="ctaLink" onClick={handleCart}>
                 <ShoppingBag />
-                <span>{cartItemsCount}</span>
+                <span>{}</span>
               </li>
               <li className="ctaLink">
                 <CircleUserRound />

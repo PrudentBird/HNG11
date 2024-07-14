@@ -6,7 +6,6 @@ import Footer from "../../components/Footer/Footer";
 import fetchProductInfo from "../../utils/fetchProductInfo";
 import { ChevronRight } from "lucide-react";
 import useCart from "../../hooks/useCart";
-import { toast } from "react-toastify";
 
 const ProductInfo = () => {
   const { id } = useParams();
@@ -37,8 +36,7 @@ const ProductInfo = () => {
   }, [id]);
 
   const handleAddToCart = () => {
-    addItemToCart(id);
-    toast.success("Item added to cart!");
+    addItemToCart(productInfo?.id);
   };
 
 
@@ -107,7 +105,7 @@ const ProductInfo = () => {
               <p>{productInfo?.description}</p>
               <div className="productCta">
                 <button className="wishlist">Add to Wishlist</button>
-                <button className="cart" onClick={handleAddToCart(productInfo?.id)}>Add to Cart</button>
+                <button className="cart" onClick={handleAddToCart}>Add to Cart</button>
               </div>
               <div className="addOns">
                 <ul>
