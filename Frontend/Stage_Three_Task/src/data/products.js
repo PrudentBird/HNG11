@@ -33,7 +33,10 @@ const initProducts = async () => {
         };
       })
     );
-    return products;
+
+    const duplicatedProducts = [].concat(products, products, products);
+
+    return duplicatedProducts;
   } catch (error) {
     console.error("Error processing products:", error);
     return [];
