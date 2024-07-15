@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { Minus, Plus, Trash2 } from "lucide-react";
 import useCart from "../../hooks/useCart";
 import products from "../../data/products";
+import { toast } from "react-toastify";
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -79,10 +80,14 @@ const Cart = () => {
 
   const handleClear = () => {
     clearCartItems();
-  }
+  };
 
   const handleCheckout = () => {
-    navigate("/checkout");
+    if (cartItems.length > 0) {
+      navigate("/checkout");
+    } else {
+      toast.error("Cart is empty!");
+    }
   };
 
   return (
@@ -163,10 +168,13 @@ const Cart = () => {
                 <p>Tax and shipping cost will be calculated later</p>
               </div>
               <span>
+                <button className="trash" onClick={handleClear}>
+                  <Trash2 />
+                </button>
 
-              <button className="trash" onClick={handleClear}><Trash2 /></button>
-
-              <button className="checkout" onClick={handleCheckout}>Checkout</button>
+                <button className="checkout" onClick={handleCheckout}>
+                  Checkout
+                </button>
               </span>
             </div>
           </div>

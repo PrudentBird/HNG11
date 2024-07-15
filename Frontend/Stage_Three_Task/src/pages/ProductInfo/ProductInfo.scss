@@ -239,11 +239,13 @@
         ul {
           display: flex;
           flex-direction: column;
-          gap: 1rem;
+          gap: 2rem;
 
           li {
             display: flex;
             justify-content: space-between;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #CDCDCD;
           }
         }
       }
@@ -319,6 +321,12 @@
 
       .productDetailsWrap {
         padding: 1.5rem;
+
+        .productDetail {
+          ul {
+            gap: 1.5rem;
+          }
+        }
       }
     }
   }
