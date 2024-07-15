@@ -86,6 +86,7 @@
             padding: 1.5rem;
             border-radius: 0.5rem;
             background: #f9f9f9;
+            cursor: pointer;
 
             svg {
               width: 1.5rem;
@@ -517,6 +518,7 @@
               }
 
               span {
+                cursor: pointer;
                 display: flex;
                 gap: 0.5rem;
                 align-items: center;

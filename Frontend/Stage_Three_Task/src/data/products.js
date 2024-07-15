@@ -28,7 +28,8 @@ const initProducts = async () => {
           img: `${process.env.REACT_APP_API_URL}/images/${imgUrl}`,
           desc: item.name,
           price: item.current_price[0].NGN[0] || "NaN",
-          id: item.id
+          categoryId: item?.categories[0]?.id,
+          id: item.id,
         };
       })
     );

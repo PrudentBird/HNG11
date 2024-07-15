@@ -12,6 +12,8 @@ import {
 } from "lucide-react";
 import {
   MdCheckBox,
+  MdCheckBoxOutlineBlank,
+  MdOutlineCheckBox,
   MdRadioButtonChecked,
   MdRadioButtonUnchecked,
 } from "react-icons/md";
@@ -31,6 +33,8 @@ const Checkout = () => {
   const [cardNumber, setCardNumber] = useState("");
   const [cardExpiry, setCardExpiry] = useState("");
   const [cardCvv, setCardCvv] = useState("");
+  const [address, setAddress] = useState(Boolean);
+  const [billingAddress, setBillingAddress] = useState(Boolean);
 
   useEffect(() => {
     try {
@@ -39,7 +43,7 @@ const Checkout = () => {
     } catch (error) {
       console.error("Error fetching cart items:", error);
     }
-  }, []);
+  }, [getCartItems]);
 
   const getProductDetailsById = (id) => {
     return products.find((product) => product.id === id);
@@ -48,8 +52,45 @@ const Checkout = () => {
   const handleShipmentOption = (option) => {
     setShipmentOption(option);
   };
+
+  const isAddressValid = () => {
+    return address;
+  };
+
+  const isShipmentOptionValid = () => {
+    return shipmentOption !== null;
+  };
+
+  const isPaymentValid = () => {
+    return (
+      cardHolderName !== "" &&
+      cardNumber.length !== "" &&
+      cardExpiry.length !== "" &&
+      cardCvv.length !== "" &&
+      billingAddress === true
+    );
+  };
+
   const nextStep = () => {
-    setCurrentStep(currentStep + 1);
+    if (currentStep === 0) {
+      if (isAddressValid()) {
+        setCurrentStep(currentStep + 1);
+      } else {
+        alert("Please select an address.");
+      }
+    } else if (currentStep === 1) {
+      if (isShipmentOptionValid()) {
+        setCurrentStep(currentStep + 1);
+      } else {
+        alert("Please select a shipment option.");
+      }
+    } else if (currentStep === 2) {
+      if (isPaymentValid()) {
+        setCurrentStep(currentStep + 1);
+      } else {
+        alert("Please fill in all payment fields correctly.");
+      }
+    }
   };
 
   const prevStep = () => {
@@ -104,6 +145,14 @@ const Checkout = () => {
     navigate("/");
   };
 
+  const handleAddress = () => {
+    setAddress(!address);
+  };
+
+  const handleBillingAddress = () => {
+    setBillingAddress(!billingAddress);
+  };
+
   return (
     <>
       <Nav />
@@ -137,8 +186,14 @@ const Checkout = () => {
               <div className="contentWrap">
                 <div className="content">
                   <span>Select Address</span>
-                  <div className="addressWrap">
-                    <MdRadioButtonChecked />
+                  <div className="addressWrap" onClick={handleAddress}>
+                    <span>
+                      {address ? (
+                        <MdRadioButtonChecked />
+                      ) : (
+                        <MdRadioButtonUnchecked />
+                      )}
+                    </span>
                     <div className="addrWrap">
                       <div className="address">
                         <p>2118 Thornridge Cir. Syracuse, Connecticut 35624</p>
@@ -402,13 +457,21 @@ const Checkout = () => {
                           cartItem.productId
                         );
                         return (
-                          <li className="summaryWrapper" key={cartItem.productId}>
+                          <li
+                            className="summaryWrapper"
+                            key={cartItem.productId}
+                          >
                             <div className="productImg">
                               <img src={productDetails?.img} alt="" />
                             </div>
                             <div className="productInfo">
                               <span>{productDetails?.desc}</span>
-                              <p>#{formatNumberWithCommas(productDetails?.price * cartItem.quantity)}</p>
+                              <p>
+                                #
+                                {formatNumberWithCommas(
+                                  productDetails?.price * cartItem.quantity
+                                )}
+                              </p>
                             </div>
                           </li>
                         );
@@ -440,7 +503,12 @@ const Checkout = () => {
                         </div>
                         <span className="total">
                           <p>Total</p>
-                          <p>#{formatNumberWithCommas(cartItems.length > 0 ? (subTotal + 14000) : 0)}</p>
+                          <p>
+                            #
+                            {formatNumberWithCommas(
+                              cartItems.length > 0 ? subTotal + 14000 : 0
+                            )}
+                          </p>
                         </span>
                       </div>
                     </div>
@@ -542,7 +610,7 @@ const Checkout = () => {
                         </div>
                       </div>
                     </div>
-                    <form action="">
+                    <form action="" id="paymentForm" name="paymentForm">
                       <div className="inputWrap">
                         <input
                           type="text"
@@ -605,8 +673,12 @@ const Checkout = () => {
                           />
                         </span>
                       </div>
-                      <span>
-                        <MdCheckBox />
+                      <span onClick={handleBillingAddress}>
+                        {billingAddress ? (
+                          <MdCheckBox />
+                        ) : (
+                          <MdCheckBoxOutlineBlank />
+                        )}
                         <p>Same as billing address</p>
                       </span>
                     </form>
