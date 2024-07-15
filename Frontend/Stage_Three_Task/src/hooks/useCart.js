@@ -83,6 +83,12 @@ const useCart = () => {
     return getCartFromLocalStorage();
   };
 
+  const clearCartItems = () => {
+    saveCartToLocalStorage([]);
+    toast.success("Cart cleared successfully");
+  };
+
+
   return {
     addItemToCart,
     removeItemFromCart,
@@ -90,6 +96,7 @@ const useCart = () => {
     decrementItemQuantity,
     getItemQuantity,
     getCartItems,
+    clearCartItems,
   };
 };
 

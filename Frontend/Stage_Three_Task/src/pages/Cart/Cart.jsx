@@ -4,7 +4,7 @@ import Nav from "../../components/Nav/Nav";
 import Footer from "../../components/Footer/Footer";
 import { useMediaQuery } from "react-responsive";
 import { Link, useNavigate } from "react-router-dom";
-import { Minus, Plus } from "lucide-react";
+import { Minus, Plus, Trash2 } from "lucide-react";
 import useCart from "../../hooks/useCart";
 import products from "../../data/products";
 
@@ -15,6 +15,7 @@ const Cart = () => {
     removeItemFromCart,
     incrementItemQuantity,
     decrementItemQuantity,
+    clearCartItems,
   } = useCart();
   const navigate = useNavigate();
   const isMobile = useMediaQuery({ query: "(max-width: 900px)" });
@@ -26,7 +27,7 @@ const Cart = () => {
     } catch (error) {
       console.error("Error fetching cart items:", error);
     }
-  }, []);
+  }, [getCartItems]);
 
   const getProductDetailsById = (id) => {
     return products.find((product) => product.id === id);
@@ -75,6 +76,10 @@ const Cart = () => {
     }
     return acc;
   }, 0);
+
+  const handleClear = () => {
+    clearCartItems();
+  }
 
   const handleCheckout = () => {
     navigate("/checkout");
@@ -157,7 +162,12 @@ const Cart = () => {
                 <span>Sub-total = #{formatNumberWithCommas(total)}</span>
                 <p>Tax and shipping cost will be calculated later</p>
               </div>
-              <button onClick={handleCheckout}>Checkout</button>
+              <span>
+
+              <button className="trash" onClick={handleClear}><Trash2 /></button>
+
+              <button className="checkout" onClick={handleCheckout}>Checkout</button>
+              </span>
             </div>
           </div>
         </div>
