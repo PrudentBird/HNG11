@@ -113,7 +113,11 @@ const ProductListing = () => {
             <ChevronRight />
             <span className="active">Smartphones</span>
           </div>
-          <div className={`productsContentWrap ${isFilterVisible ? "contentHeight" : ""}`}>
+          <div
+            className={`productsContentWrap ${
+              isFilterVisible ? "contentHeight" : ""
+            }`}
+          >
             <div
               className={`filtersWrap ${isFilterVisible ? "filterHandle" : ""}`}
             >
@@ -173,12 +177,12 @@ const ProductListing = () => {
                     {selectedCategories.length === 0
                       ? products.length
                       : (() => {
-                          const productIds = new Set();
+                          const productIds = [];
                           selectedCategories.forEach((categoryName) => {
                             const ids = categorizedProducts[categoryName] || [];
-                            ids.forEach((id) => productIds.add(id));
+                            ids.forEach((id) => productIds.push(id));
                           });
-                          return productIds.size;
+                          return productIds.length;
                         })()}
                   </span>
                 </div>
@@ -207,15 +211,16 @@ const ProductListing = () => {
                 </div>
               </div>
               <div className="productsWrapper">
-                {!isFilterVisible &&   currentProducts.map((product, index) => (
-                  <Product
-                    img={product.img}
-                    desc={product.desc}
-                    price={product.price}
-                    id={product.id}
-                    key={index}
-                  />
-                ))}
+                {!isFilterVisible &&
+                  currentProducts.map((product, index) => (
+                    <Product
+                      img={product.img}
+                      desc={product.desc}
+                      price={product.price}
+                      id={product.id}
+                      key={index}
+                    />
+                  ))}
               </div>
               <div className="footer">
                 <ChevronLeft onClick={handlePreviousPage} />
