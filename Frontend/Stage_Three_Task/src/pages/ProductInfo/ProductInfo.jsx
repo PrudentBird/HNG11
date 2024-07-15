@@ -13,6 +13,7 @@ const ProductInfo = () => {
 
   const [productInfo, setProductInfo] = useState();
   const [extraInfo, setExtraInfo] = useState({});
+  const [selectedImageSrc, setSelectedImageSrc] = useState("");
 
   useEffect(() => {
     const fetchInfo = async () => {
@@ -35,10 +36,13 @@ const ProductInfo = () => {
     fetchInfo();
   }, [id]);
 
+  const handleImageClick = (src) => {
+    setSelectedImageSrc(src);
+  };
+
   const handleAddToCart = () => {
     addItemToCart(productInfo?.id);
   };
-
 
   const formatNumberWithCommas = (number) => {
     const numberString = number.toString();
@@ -78,6 +82,7 @@ const ProductInfo = () => {
                 {productInfo?.photos?.map((photo, index) => (
                   <div className="imgSelector" key={index}>
                     <img
+                      onClick={(e) => handleImageClick(e.target.src)}
                       src={`${process.env.REACT_APP_API_URL}/images/${photo.url}`}
                       alt=""
                     />
@@ -86,7 +91,7 @@ const ProductInfo = () => {
               </div>
               <div className="productImg">
                 <img
-                  src={`${process.env.REACT_APP_API_URL}/images/${productInfo?.photos[0]?.url}`}
+                  src={selectedImageSrc || `${process.env.REACT_APP_API_URL}/images/${productInfo?.photos[0]?.url}`}
                   alt=""
                 />
               </div>
@@ -105,7 +110,9 @@ const ProductInfo = () => {
               <p>{productInfo?.description}</p>
               <div className="productCta">
                 <button className="wishlist">Add to Wishlist</button>
-                <button className="cart" onClick={handleAddToCart}>Add to Cart</button>
+                <button className="cart" onClick={handleAddToCart}>
+                  Add to Cart
+                </button>
               </div>
               <div className="addOns">
                 <ul>
