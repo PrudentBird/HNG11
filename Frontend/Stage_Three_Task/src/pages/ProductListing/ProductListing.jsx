@@ -21,6 +21,7 @@ const ProductListing = () => {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [selectedFilter, setSelectedFilter] = useState(filters[0]);
   const [categorizedProducts, setCategorizedProducts] = useState({});
+  const [isFilterVisible, setIsFilterVisible] = useState(false);
   const productsPerPage = 12;
   const totalPages = Math.ceil(products?.length / productsPerPage);
 
@@ -95,6 +96,11 @@ const ProductListing = () => {
 
     return categorizedProducts;
   };
+
+  const handleFilterVisibility = () => {
+    setIsFilterVisible((prevState) => !prevState);
+  };
+
   return (
     <>
       <Nav />
@@ -107,8 +113,14 @@ const ProductListing = () => {
             <ChevronRight />
             <span className="active">Smartphones</span>
           </div>
-          <div className="productsContentWrap">
-            <div className="filtersWrap">
+          <div className={`productsContentWrap ${isFilterVisible ? "contentHeight" : ""}`}>
+            <div
+              className={`filtersWrap ${isFilterVisible ? "filterHandle" : ""}`}
+            >
+              <div className="backCta" onClick={handleFilterVisibility}>
+                <ChevronLeft />
+                <span>Filters</span>
+              </div>
               <div className="header">
                 <span>Brand</span>
               </div>
@@ -171,7 +183,10 @@ const ProductListing = () => {
                   </span>
                 </div>
                 <div className="options">
-                  <button className="quickFilter">
+                  <button
+                    className="quickFilter"
+                    onClick={handleFilterVisibility}
+                  >
                     Filters
                     <Settings2 />
                   </button>
@@ -192,7 +207,7 @@ const ProductListing = () => {
                 </div>
               </div>
               <div className="productsWrapper">
-                {currentProducts.map((product, index) => (
+                {!isFilterVisible &&   currentProducts.map((product, index) => (
                   <Product
                     img={product.img}
                     desc={product.desc}

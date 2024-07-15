@@ -36,12 +36,30 @@
     .productsContentWrap {
       display: flex;
       gap: 2rem;
+      position: relative;
 
       .filtersWrap {
         display: flex;
         flex-direction: column;
         width: max-content;
         gap: 1rem;
+
+        .backCta {
+          display: none;
+          align-items: center;
+          gap: 0.5rem;
+
+          svg {
+            width: 1.5rem;
+            height: 1.5rem;
+            color: #001845;
+          }
+
+          span {
+            font-size: 1.5rem;
+            font-weight: 600;
+          }
+        }
 
         .header {
           cursor: pointer;
@@ -133,7 +151,7 @@
           width: 100%;
 
           div {
-            color: #6C6C6C;
+            color: #6c6c6c;
             span {
               color: #000;
               font-size: 1.25rem;
@@ -234,8 +252,25 @@
       }
 
       .productsContentWrap {
+
         .filtersWrap {
+          position: absolute;
+          top: 0;
+          height: 100vh;
+          left: 0;
+          background: #fff;
+          width: 100%;
           display: none;
+          overflow: scroll;
+
+          .backCta {
+            display: flex;
+            padding-top: 1rem;
+          }
+        }
+
+        .filterHandle {
+          display: flex;
         }
 
         .productsContent {
@@ -280,7 +315,7 @@
 
                 select {
                   padding: 0 0.75rem;
-                  width: 100%;
+                  width: max-content;
                   margin-right: 0.75rem;
                 }
               }
@@ -290,12 +325,12 @@
           .productsWrapper {
             grid-template-columns: repeat(2, 1fr);
             gap: 1rem;
-
-            div:last-child {
-              display: none;
-            }
           }
         }
+      }
+
+      .contentHeight {
+        height: 100vh;
       }
     }
   }
