@@ -19,6 +19,7 @@ const ProductListing = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [currentProducts, setCurrentProducts] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
+  const [selectedFilter, setSelectedFilter] = useState(filters[0]);
   const [categorizedProducts, setCategorizedProducts] = useState({});
   const productsPerPage = 12;
   const totalPages = Math.ceil(products?.length / productsPerPage);
@@ -42,10 +43,16 @@ const ProductListing = () => {
         );
     }
 
+    if (selectedFilter === "By lowest price") {
+      filteredProducts.sort((a, b) => a.price - b.price);
+    } else if (selectedFilter === "By highest price") {
+      filteredProducts.sort((a, b) => b.price - a.price);
+    }
+
     setCurrentProducts(
       filteredProducts?.slice(indexOfFirstProduct, indexOfLastProduct)
     );
-  }, [currentPage, selectedCategories, categorizedProducts]);
+  }, [currentPage, selectedCategories, categorizedProducts, selectedFilter]);
 
   const handlePreviousPage = () => {
     if (currentPage > 1) setCurrentPage(currentPage - 1);
@@ -58,6 +65,12 @@ const ProductListing = () => {
   const handlePageClick = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
+
+  const handleFilterChange = (e) => {
+    setSelectedFilter(e.target.value);
+    setCurrentPage(1);
+  };
+
   const handleCategoryClick = (categoryName) => {
     setSelectedCategories((prevSelectedCategories) => {
       if (prevSelectedCategories.includes(categoryName)) {
@@ -163,7 +176,12 @@ const ProductListing = () => {
                     <Settings2 />
                   </button>
                   <div>
-                    <select name="quickFilter" id="">
+                    <select
+                      name="quickFilter"
+                      id=""
+                      value={selectedFilter}
+                      onChange={handleFilterChange}
+                    >
                       {filters.map((filter, index) => (
                         <option key={index} value={filter}>
                           {filter}
